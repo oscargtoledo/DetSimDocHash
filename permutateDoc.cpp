@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <fstream>
 #include <algorithm>
+#include <cstdlib>
 using namespace std;
 
 void usage(){
@@ -15,6 +16,8 @@ int main(int argc, char** argv){
 	{
 		usage();
 	}
+	system("mkdir -p perms");
+
 	string originalPath = argv[1];
 
 	ifstream oriFile;
@@ -33,7 +36,7 @@ int main(int argc, char** argv){
 	{
 		fstream f;
 		next_permutation(permutation.begin(),permutation.end());
-		f.open("perm_"+ to_string(i) + ".txt", ios::out|ios::in|ios::trunc);
+		f.open("perms/perm_"+ to_string(i) + ".txt", ios::out|ios::in|ios::trunc);
 		f<<permutation;
 		f.close();
 
