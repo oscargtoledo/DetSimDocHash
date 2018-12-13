@@ -3,6 +3,7 @@
 #include <fstream>
 #include <algorithm>
 #include <cstdlib>
+#include <vector>
 using namespace std;
 
 void usage(){
@@ -16,6 +17,7 @@ int main(int argc, char** argv){
 	{
 		usage();
 	}
+	
 	system("mkdir -p perms");
 
 	string originalPath = argv[1];
@@ -25,22 +27,23 @@ int main(int argc, char** argv){
 	oriFile.open(originalPath);
 
 	string temp;
-	string permutation = "";
+	vector<string> permutation;
 	while(oriFile >> temp){
 		cout << temp << endl;
-		permutation += temp;
+		permutation.push_back(temp);
 	}
 	int perms = stoi(argv[2]);
 
 	for (int i = 0; i < perms; ++i)
 	{
 		fstream f;
-		next_permutation(permutation.begin(),permutation.end());
+		random_shuffle(permutation.begin(), permutation.end());
 		f.open("perms/perm_"+ to_string(i) + ".txt", ios::out|ios::in|ios::trunc);
-		f<<permutation;
+		for(string s : permutation){
+			f<<s << " ";
+		}
 		f.close();
 
 	}
-
 
 }
