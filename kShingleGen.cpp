@@ -30,6 +30,7 @@ bool kShingling(string path,int k, set<string>& shingles){
 			}
 		}
 		total += " ";
+		chars++;
 		
 	}
 
@@ -41,19 +42,23 @@ bool kShingling(string path,int k, set<string>& shingles){
 		cout << "Valid document: creating " << k << "-shingles" << endl;
 		for (int i = 0; i < total.length(); i = i+k)
 		{
-			schars++;
 			if (i+k <= total.length())
 			{
 				shin++;
+				cout << total.substr(i,k);
 				shingles.insert(it,total.substr(i,k));
 				it++;
 			}
+			cout << endl;
+			schars = i+k;
 		}
+		cout << "--------------------------------------------------------" << endl;
 		cout << "Generació finalitzada. Stats:" << endl;
-		cout << "Paraules del document:" << words << endl;
-		cout << "Caràcters analitzats del document:" << chars << endl;
-		cout << "Caràcters considerats per a " << k <<"-shingles:" << schars << endl;
-		cout << "Número de " << k << "-shingles:" << shin << endl;
+		cout << "Paraules del document:                          " << words << endl;
+		cout << "Caràcters analitzats del document:              " << chars << endl;
+		cout << "Caràcters considerats per a " << k <<"-shingles:         " << schars << endl;
+		cout << "Número de " << k << "-shingles:                           "  << shin << endl;
+		cout << "--------------------------------------------------------" << endl;
 
 		return true;
 
