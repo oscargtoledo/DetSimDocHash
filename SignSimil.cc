@@ -74,14 +74,14 @@ float SignatureSimilarity(string path1, string path2, int k, int t)
         row++;
     }
 
-    for(int i = 0; i < signMatrix.size(); ++i)
+    /*for(int i = 0; i < signMatrix.size(); ++i)
     {
         for(int j = 0; j < signMatrix[i].size(); ++j)
         {
             cout << signMatrix[i][j] << " ";
         }
         cout << endl;
-    }
+    }*/
 
     return computeSimilarity(signMatrix);
 }
