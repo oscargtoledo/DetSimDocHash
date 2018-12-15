@@ -33,14 +33,16 @@ bool kShingling(string path,int k, set<string>& shingles){
 		chars++;
 		
 	}
+	total = total.substr(0,total.size()-1);
 
 	set<string>::iterator it = shingles.begin();
 	int schars = 0;
 	int shin = 0;
 	if (total.length()>=k)
 	{
-		for (int i = 0; i < total.length(); i = i+k)
+		for (int i = 0; i < total.length(); i++)
 		{
+			cout << "e";
 			if (i+k <= total.length())
 			{
 				shin++;
