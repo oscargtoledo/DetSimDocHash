@@ -25,20 +25,26 @@ int main(int argc, char** argv)
     }
     cout << "aha \n";
     vector<vector<int> > matriu = SignatureSimilarity(s, k, t);
-
-    cout << "De quin dels arxius anteriors vols fer la comparacio? (enter del 1 al " << s.size() << ") ";
-    int n; cin >> n;
-    vector<float> resultat = computeSimilarity(matriu, n-1);
-
-    cout << "La aproximacio de la similitud dels documents es: " << endl;
-    for(int i = 0; i < resultat.size(); i++)
+    int n; 
+    while(n != 0)
     {
-        cout << i+1 << '\t';
+        cout << "De quin dels arxius anteriors vols fer la comparacio? (enter del 1 al " << s.size() << ", 0 per sortir) ";
+        cin >> n;
+        if(n != 0)
+        {
+            vector<float> resultat = computeSimilarity(matriu, n-1);
+
+            cout << "La aproximacio de la similitud dels documents es: " << endl;
+            for(int i = 0; i < resultat.size(); i++)
+            {
+                cout << i+1 << '\t';
+            }
+            cout << endl;
+            for(int i = 0; i < resultat.size(); i++)
+            {
+                cout << resultat[i] << '%' << '\t';
+            }
+            cout << endl;
+        }
     }
-    cout << endl;
-    for(int i = 0; i < resultat.size(); i++)
-    {
-        cout << resultat[i] << '%' << '\t';
-    }
-    cout << endl;
 }
