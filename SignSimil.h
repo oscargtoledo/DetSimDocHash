@@ -5,9 +5,12 @@
 #include <vector>
 #include <string>
 #include <set>
+#include "kShingleGen.h"
 using namespace std;
 
-float SignatureSimilarity(string path1, string path2, int k, int t);
+vector<vector<int> > SignatureSimilarity(const vector<string> &paths, int k, int t);
+
+vector<float> computeSimilarity(const vector<vector<int> >& Matrix, int index);
 
 
 #endif
