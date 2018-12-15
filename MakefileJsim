@@ -1,0 +1,9 @@
+all:
+	g++ kShingleGen.cpp -c
+	g++ JsimMain.cpp -c
+	g++ Jsim.cpp -c
+	g++ JsimMain.o kShingleGen.o Jsim.o -o JsimMain
+
+clean:
+	rm *.o
+	rm main
