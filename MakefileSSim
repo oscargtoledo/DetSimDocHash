@@ -1,0 +1,17 @@
+CC=g++
+CFLAGS=-c -std=c++11 -I.
+
+SignSimilMain: SignSimilMain.o SignSimil.o kShingleGen.o
+	$(CC) -o SignSimilMain SignSimilMain.o SignSimil.o kShingleGen.o
+
+SignSimilMain.o: SignSimilMain.cc SignSimil.h
+	$(CC) $(CFLAGS) SignSimilMain.cc
+
+SignSimil.o: SignSimil.cc SignSimil.h kShingleGen.h
+	$(CC) $(CFLAGS) SignSimil.cc
+
+kShingleGen.o: kShingleGen.cpp kShingleGen.h
+	$(CC) $(CFLAGS) kShingleGen.cpp
+
+clean:
+	rm SignSimilMain.o SignSimil.o kShingleGen.o SignSimilMain
