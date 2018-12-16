@@ -22,15 +22,16 @@ set<string> getAllElements(const vector<set<string> >& sets)
 
 vector<float> computeSimilarity(const vector<vector<int> >& Matrix, int index)
 {
-    vector<float> r(Matrix[0].size(), 0);
+    vector<float> r(Matrix.size());
     for(int i = 0; i < Matrix.size(); i++)
     {
+        float suma = 0;
         for(int j = 0; j < Matrix[i].size(); j++)
         {
-            if(Matrix[i][j] == Matrix[i][index]) r[j]++;
+            if(Matrix[i][j] == Matrix[index][j]) suma++;
         }
+        r[i] = (suma/Matrix[i].size())*100;
     }
-    for(int i = 0; i < r.size(); i++) r[i] = (r[i]/Matrix.size())*100;
     return r;
 }
 
@@ -72,7 +73,7 @@ vector<vector<int> > SignatureSimilarity(const vector<string> &paths, int k, int
 
     set<string> elements = getAllElements(vSet);
 
-    vector<vector<int> > signMatrix(t,vector<int>(paths.size(), -1));
+    vector<vector<int> > signMatrix(paths.size(),vector<int>(t, -1));
 
     int p = nextPrime(elements.size());
     vector<int> A(t),B(t);
@@ -95,8 +96,8 @@ vector<vector<int> > SignatureSimilarity(const vector<string> &paths, int k, int
             {
                 for(int j = 0; j < t; j++)                                      // for every hash
                 {
-                    if(signMatrix[j][i] == -1 or signMatrix[j][i] > hashf[j])   // if current hash is smaller than the existing hash in the slot
-                            signMatrix[j][i] = hashf[j];                        //then replace with the smaller hash value
+                    if(signMatrix[i][j] == -1 or signMatrix[i][j] > hashf[j])   // if current hash is smaller than the existing hash in the slot
+                            signMatrix[i][j] = hashf[j];                        //then replace with the smaller hash value
                 }
             }
         }
