@@ -49,7 +49,7 @@ int nextPrime(int n)
 {
     if(n%2 == 0) --n;
     else ----n;
-    while(!isPrime(++++n)){}
+    while(!isPrime(++++n)){}   // +2 perque els parells no son primers
     return n;
 }
 
