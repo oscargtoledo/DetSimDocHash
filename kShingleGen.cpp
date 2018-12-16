@@ -7,7 +7,7 @@ bool kShingling(string path,int k, set<string>& shingles){
 	string s;
 	if (!inFile)
 	{
-		cerr << "Error opening doc1";
+		cerr << "Error al obrir " << path << endl;
 		exit(1);
 	}
 
