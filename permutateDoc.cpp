@@ -34,8 +34,6 @@ int main(int argc, char** argv){
 	name.pop_back();
 	name.pop_back();
 	name.pop_back();
-	cout << name << endl;
-
 	ifstream oriFile;
 	oriFile.open(originalPath);
 	string temp;
