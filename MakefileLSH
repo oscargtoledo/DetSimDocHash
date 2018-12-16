@@ -1,0 +1,23 @@
+CC=g++
+CFLAGS=-c -std=c++11 -I.
+
+LSHMain: LSHMain.o LSH.o SignSimil.o kShingleGen.o Jsim.o
+	$(CC) -o LSHMain LSHMain.o LSH.o SignSimil.o Jsim.o kShingleGen.o
+
+LSHMain.o: LSHMain.cpp LSH.h SignSimil.h Jsim.h kShingleGen.h
+	$(CC) $(CFLAGS) LSHMain.cpp
+
+LSH.o: LSH.cpp LSH.h SignSimil.h Jsim.h kShingleGen.h
+	$(CC) $(CFLAGS) LSH.cpp
+
+SignSimil.o: SignSimil.cc SignSimil.h Jsim.h kShingleGen.h
+	$(CC) $(CFLAGS) SignSimil.cc
+	
+Jsim.o: Jsim.cpp Jsim.h kShingleGen.h
+	$(CC) $(CFLAGS) Jsim.cpp
+
+kShingleGen.o: kShingleGen.cpp kShingleGen.h
+	$(CC) $(CFLAGS) kShingleGen.cpp
+
+clean:
+	rm SignSimilMain.o SignSimil.o Jsim.o kShingleGen.o LSH.o LSHMain
