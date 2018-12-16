@@ -28,6 +28,14 @@ int main(int argc, char** argv){
 		system("rm -r perms/*");
 	}
 	string originalPath = argv[1];
+	const int idx = originalPath.find_last_of("\\/");
+	string name = originalPath.substr(idx+1);
+	name.pop_back();
+	name.pop_back();
+	name.pop_back();
+	name.pop_back();
+	cout << name << endl;
+
 	ifstream oriFile;
 	oriFile.open(originalPath);
 	string temp;
@@ -41,7 +49,7 @@ int main(int argc, char** argv){
 	{
 		fstream f;
 		random_shuffle(permutation.begin(), permutation.end());
-		f.open("perms/perm_"+ to_string(i) + ".txt", ios::out|ios::in|ios::trunc);
+		f.open("perms/"+name + "_"+ to_string(i) + ".txt", ios::out|ios::in|ios::trunc);
 		for (string s : permutation)
 		{
 			f<<s<<" ";
