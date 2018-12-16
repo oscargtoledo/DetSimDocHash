@@ -42,7 +42,6 @@ bool kShingling(string path,int k, set<string>& shingles){
 	{
 		for (int i = 0; i < total.length(); i++)
 		{
-			cout << "e";
 			if (i+k <= total.length())
 			{
 				shin++;
