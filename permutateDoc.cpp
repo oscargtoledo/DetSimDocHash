@@ -4,10 +4,11 @@
 #include <algorithm>
 #include <cstdlib>
 #include <vector>
+#include <sys/stat.h>
 using namespace std;
 
 void usage(){
-	cerr << "Usage: permutateDoc file_path n_permutations" << endl;
+	cerr << "Usage: ./permutateDoc file_path n_permutations" << endl;
 	exit(1);
 }
 
@@ -18,18 +19,20 @@ int main(int argc, char** argv){
 		usage();
 	}
 	
-	system("mkdir -p perms");
+	struct stat info;
+	if (stat("perms",&info) != 0)
+	{
+		system("mkdir -p perms");
+	} else {
 
+		system("rm -r perms/*");
+	}
 	string originalPath = argv[1];
-
 	ifstream oriFile;
-
 	oriFile.open(originalPath);
-
 	string temp;
 	vector<string> permutation;
 	while(oriFile >> temp){
-		cout << temp << endl;
 		permutation.push_back(temp);
 	}
 	int perms = stoi(argv[2]);
@@ -39,8 +42,9 @@ int main(int argc, char** argv){
 		fstream f;
 		random_shuffle(permutation.begin(), permutation.end());
 		f.open("perms/perm_"+ to_string(i) + ".txt", ios::out|ios::in|ios::trunc);
-		for(string s : permutation){
-			f<<s << " ";
+		for (string s : permutation)
+		{
+			f<<s<<" ";
 		}
 		f.close();
 
