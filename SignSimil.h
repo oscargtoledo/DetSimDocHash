@@ -5,6 +5,8 @@
 #include <vector>
 #include <string>
 #include <set>
+#include <stdlib.h>
+#include <time.h>
 #include "kShingleGen.h"
 using namespace std;
 

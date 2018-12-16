@@ -22,17 +22,42 @@ set<string> getAllElements(const vector<set<string> >& sets)
 
 vector<float> computeSimilarity(const vector<vector<int> >& Matrix, int index)
 {
-    vector<float> r(Matrix.size());
+    vector<float> r(Matrix[0].size(), 0);
     for(int i = 0; i < Matrix.size(); i++)
     {
-        float suma = 0;
         for(int j = 0; j < Matrix[i].size(); j++)
         {
-            if(Matrix[i][j] == Matrix[index][j]) suma++;
+            if(Matrix[i][j] == Matrix[i][index]) r[j]++;
         }
-        r[i] = (suma/Matrix[i].size())*100;
     }
+    for(int i = 0; i < r.size(); i++) r[i] = (r[i]/Matrix.size())*100;
     return r;
+}
+
+bool isPrime(int n)
+{
+    if(n == 1) return true;
+    for(int i = 3; i*i < n; i += 2)
+    {
+        if(n%i == 0) return false;
+    }
+    return true;
+}
+
+int nextPrime(int n)
+{
+    if(n%2 == 0) --n;
+    else ----n;
+    while(!isPrime(++++n)){}
+    return n;
+}
+
+void RandomInts(vector<int> &V, int t, int p)
+{
+    for(int i = 0; i < t; i++)
+    {
+        V[i] = rand()%p;
+    }
 }
 
 vector<vector<int> > SignatureSimilarity(const vector<string> &paths, int k, int t)
@@ -47,7 +72,13 @@ vector<vector<int> > SignatureSimilarity(const vector<string> &paths, int k, int
 
     set<string> elements = getAllElements(vSet);
 
-    vector<vector<int> > signMatrix(paths.size(),vector<int>(t, -1));
+    vector<vector<int> > signMatrix(t,vector<int>(paths.size(), -1));
+
+    int p = nextPrime(elements.size());
+    vector<int> A(t),B(t);
+    srand(time(NULL));
+    RandomInts(A, t, elements.size());
+    RandomInts(B, t, elements.size());
 
     int row = 0;
     for(set<string>::iterator it = elements.begin(); it != elements.end(); ++it)    // for every element
@@ -55,18 +86,17 @@ vector<vector<int> > SignatureSimilarity(const vector<string> &paths, int k, int
         vector<int> hashf(t);
         for(int i = 0; i < t; i++)                                              //COMPUTO LAS FUNCIONES HASH
         {
-            if(i%2 == 0) hashf[i] = (row + i)%elements.size();                  //TODO: posar mes funcions de hash "random"
-            else hashf[i] = (2*row + i)%elements.size();
+            hashf[i] = (A[i]*row + B[i])%p;
         }
 
-        for(int j = 0; j < vSet.size(); j++)                                    //for every set
+        for(int i = 0; i < vSet.size(); i++)                                    //for every set
         {
-            if(vSet[j].find(*it) != vSet[j].end())                              // if the set contains the element
+            if(vSet[i].find(*it) != vSet[i].end())                              // if the set contains the element
             {
-                for(int i = 0; i < t; i++)                                      // for every hash
+                for(int j = 0; j < t; j++)                                      // for every hash
                 {
-                    if(signMatrix[j][i] == -1 or signMatrix[j][i] > hashf[i])   // if current hash is smaller than the existing hash in the slot
-                            signMatrix[j][i] = hashf[i];                        //then replace with the smaller hash value
+                    if(signMatrix[j][i] == -1 or signMatrix[j][i] > hashf[j])   // if current hash is smaller than the existing hash in the slot
+                            signMatrix[j][i] = hashf[j];                        //then replace with the smaller hash value
                 }
             }
         }

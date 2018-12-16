@@ -23,7 +23,7 @@ int main(int argc, char** argv)
     {
         s.push_back(argv[i]);
     }
-    cout << "aha \n";
+
     vector<vector<int> > matriu = SignatureSimilarity(s, k, t);
     int n; 
     while(n != 0)
