@@ -13,6 +13,17 @@ using namespace std;
 
 struct parella{
     int i,j;
+    
+    bool operator==(const parella& a) const
+    {
+        return (i == a.i && j == a.j);
+    }
+    
+    
+    bool operator<(const parella& lhs) const
+    {
+        return lhs.i < i || (lhs.i == i && lhs.j < j);
+    }
 };
 
 int generateNextPrimeNumber(int n);
@@ -25,7 +36,7 @@ int hashFunction(int n, int hashedValue, int &primer);
  * Post: Retorna un enter de valor 0..m, on m es el primer nombre primer despres de n, que representa un bucket
  */
 
-vector<parella> LSH_Function(vector< vector <int>> SignatureMatrix, int bands, double threshold);
+set<parella> LSH_Function(vector< vector <int>> SignatureMatrix, int bands);
 /* Pre: L'enter bands es multiple de SignatureMatrix.size(), 0<=threshold<=1
  * Post: Retorna el conjunt de parelles de documents a comparar
  */
