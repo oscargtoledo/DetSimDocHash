@@ -55,6 +55,7 @@ clean:
 	rm SignSimilMain
 	rm LSHMain
 	rm JsimMain
+	rm permutateDoc
 
 
 
